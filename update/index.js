@@ -22,6 +22,6 @@ app.post("/update", (req, res) => {
   });
 });
 
-app.listen(80, () => {
-  console.log("Update Service listening on port 80");
+app.listen(process.env.PORT, () => {
+  console.log(`Update Service listening on port ${process.env.PORT}`);
 });

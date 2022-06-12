@@ -22,6 +22,6 @@ app.get("/read/:npm", (req, res) => {
   });
 });
 
-app.listen(80, () => {
-  console.log("Read Service listening on port 80");
+app.listen(process.env.PORT, () => {
+  console.log(`Read Service listening on port ${process.env.PORT}`);
 });

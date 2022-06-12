@@ -1,0 +1,20 @@
+proxy_cache_path /tmp/cache keys_zone=one:10m levels=1:2 inactive=60m;
+
+server {
+  listen $PORT;
+
+  location /update {                     
+    proxy_pass https://update-service-tm4.herokuapp.com/update;
+  }
+
+  location ~ /read/([0-9]*)$ {
+    proxy_pass https://read-service-tm4.herokuapp.com;
+  }
+  
+  location ~ /read/([0-9]*)/([0-9]*) {
+    proxy_cache one;
+    proxy_cache_valid 200 302 301 1d;
+    resolver 127.0.0.11;
+    proxy_pass https://read-service-tm4.herokuapp.com/read/$1;
+  }
+}
